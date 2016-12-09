@@ -1,0 +1,470 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Tech Stack POC",
+		"_postman_id": "3c812f62-ba09-6bfc-5092-9126b47164e6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"description": "",
+			"item": [
+				{
+					"name": "All Tests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var tests = JSON.parse(responseBody);",
+									"if(tests.length > 0){",
+									"    postman.setEnvironmentVariable(\"testId\",tests[0]._id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/tests",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Test",
+					"request": {
+						"url": "{{baseUrl}}/tests/{{testId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Test",
+					"request": {
+						"url": "{{baseUrl}}/tests/{{testId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Test\",\n\t\"summary\":\"Tester\",\n\t\"description\":\"test@tester.com\",\n\t\"startDate\": \"2016-12-08T22:01:21.553Z\",\n\t\"endDate\": \"2016-12-12T22:01:21.553Z\",\n\t\"allowedAttempts\":5,\n\t\"randomizeQuestions\": false,\n\t\"passingScore\": 75,\n\t\"active\": true,\n\t\"questions\":[\n\t\t{\n\t\t\t\"question\": \"What is your favorite color??\",\n\t\t\t\"notes\": \"\",\n\t\t\t\"order\": 0,\n\t\t\t\"answers\":[\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"Red!\",\n\t\t\t\t\t\"correct\": false,\n\t\t\t\t\t\"order\": 0\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"No, blue!\",\n\t\t\t\t\t\"correct\": true,\n\t\t\t\t\t\"order\": 1\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"question\": \"What is the meaning of life?\",\n\t\t\t\"notes\": \"\",\n\t\t\t\"order\": 1,\n\t\t\t\"answers\":[\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"42\",\n\t\t\t\t\t\"correct\": false,\n\t\t\t\t\t\"order\": 0\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"All evidence to date points to chocolate\",\n\t\t\t\t\t\"correct\": true,\n\t\t\t\t\t\"order\": 1\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var test = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"testId\",test._id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/tests",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"World History\",\n\t\"summary\":\"You don't know anything!\",\n\t\"description\":\"Pointless knowledge about really old things. Like Napolean's hat!\",\n\t\"startDate\": \"2016-12-08T22:01:21.553Z\",\n\t\"endDate\": \"2016-12-12T22:01:21.553Z\",\n\t\"allowedAttempts\":5,\n\t\"randomizeQuestions\": false,\n\t\"passingScore\": 70,\n\t\"active\": true,\n\t\"questions\":[\n\t\t{\n\t\t\t\"question\": \"What is your favorite color?\",\n\t\t\t\"notes\": \"\",\n\t\t\t\"order\": 0,\n\t\t\t\"answers\":[\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"Red\",\n\t\t\t\t\t\"correct\": false,\n\t\t\t\t\t\"order\": 0\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"No, blue!\",\n\t\t\t\t\t\"correct\": true,\n\t\t\t\t\t\"order\": 1\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"question\": \"What is the meaning of life?\",\n\t\t\t\"notes\": \"\",\n\t\t\t\"order\": 1,\n\t\t\t\"answers\":[\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"42\",\n\t\t\t\t\t\"correct\": false,\n\t\t\t\t\t\"order\": 0\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"answer\": \"All evidence to date points to chocolate\",\n\t\t\t\t\t\"correct\": true,\n\t\t\t\t\t\"order\": 1\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Test",
+					"request": {
+						"url": "{{baseUrl}}/tests/{{testId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Search Tests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var test = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"testId\",test._id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/tests/search",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"World History\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestAttempt",
+			"description": "",
+			"item": [
+				{
+					"name": "All Attempts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var attempts = JSON.parse(responseBody);",
+									"if(attempts.length > 0){",
+									"    postman.setEnvironmentVariable(\"attemptId\",attempts[0]._id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/attempts",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Attempt",
+					"request": {
+						"url": "{{baseUrl}}/attempts/{{attemptId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Attempt",
+					"request": {
+						"url": "{{baseUrl}}/attempts/{{attemptId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"testId\":\"5849e8f604c9720c8491deac\",\n\t\"userId\":\"5849b8cb2f6610218029cd72\",\n\t\"score\":51,\n\t\"pass\":false,\n\t\"completedAt\":\"2016-12-08T22:01:21.553Z\",\n\t\"answers\":[\n\t\t{\n\t\t\t\"question\": \"What is your favorite color\",\n\t\t\t\"answer\":\"Red\",\n\t\t\t\"correct\":true\n\t\t},\n\t\t{\n\t\t\t\"question\": \"What is the meaning of life\",\n\t\t\t\"answer\":\"42\",\n\t\t\t\"correct\":false\n\t\t}\n\t]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Attempt",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var attempt = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"attemptId\", attempt._id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/attempts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"testId\":\"5849e8f604c9720c8491deac\",\n\t\"userId\":\"5849b8cb2f6610218029cd72\",\n\t\"score\":50,\n\t\"pass\":false,\n\t\"completedAt\":\"2016-12-08T22:01:21.553Z\",\n\t\"answers\":[\n\t\t{\n\t\t\t\"question\": \"What is your favorite color?\",\n\t\t\t\"answer\":\"Red\",\n\t\t\t\"correct\":true\n\t\t},\n\t\t{\n\t\t\t\"question\": \"What is the meaning of life?\",\n\t\t\t\"answer\":\"42\",\n\t\t\t\"correct\":false\n\t\t}\n\t]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Attempts",
+					"request": {
+						"url": "{{baseUrl}}/attempts/{{attemptId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Search Attempts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var attempts = JSON.parse(responseBody);",
+									"if(attempts.length > 0){",
+									"    postman.setEnvironmentVariable(\"attemptId\",attempts[0]._id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/attempts/search",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pass\": true\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var users = JSON.parse(responseBody);",
+									"if(users.length > 0){",
+									"    postman.setEnvironmentVariable(\"userId\",users[0]._id);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/users",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var user = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"userId\",user._id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Test Tester\",\n\t\"address\":\"123 Tester Lane\",\n\t\"city\": \"Salt Lake City\",\n\t\"state\": \"Utah\",\n\t\"zip\":84123,\n\t\"country\": \"USA\",\n\t\"email\":\"test@tester.com\",\n\t\"admin\":true,\n\t\"password\":\"password\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"url": "{{baseUrl}}/users/{{userId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"url": "{{baseUrl}}/users/{{userId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Joe User\",\n\t\"address\":\"4321 Fake St.\",\n\t\"city\": \"Provo\",\n\t\"state\": \"Utah\",\n\t\"zip\":84321,\n\t\"country\": \"USA\",\n\t\"email\":\"juser@sharklasers.com\",\n\t\"admin\":false,\n\t\"password\":\"password1!\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"url": "{{baseUrl}}/users/{{userId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var attempts = JSON.parse(responseBody);",
+									"if(attempts.length > 0){",
+									"    postman.setEnvironmentVariable(\"attemptId\",attempts[0]._id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{baseUrl}}/users/search",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Test Tester\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Info",
+			"request": {
+				"url": "{{baseUrl}}/",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
