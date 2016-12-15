@@ -8,7 +8,7 @@ interface ITest {
     startDate: string;
     endDate: string;
     allowedAttempts: number;
-    randomizeQuestions: boolean;
+    randomizeQuestionOrdering: boolean;
     passingScore: number;
     active: boolean;
     questions: Array<IQuestionModel>

@@ -1,0 +1,42 @@
+.message-input {
+  padding: .25rem;
+  outline: 0 none;
+  border: 2px solid #c2c2c2;
+  box-shadow: none;
+  margin-right: 1rem;
+}
+
+.button {
+  padding: .25rem;
+  background-color: #4286f4;
+  color: #ffffff;
+  border: 2px solid #c2c2c2;
+}
+
+.message-controls {
+  margin: 2rem 0;
+}
+
+.messages {
+  max-width: 50%;
+}
+.message-card {
+  border: 1px solid #c2c2c2;
+  box-shadow: 1px 2px 5px 1px #e2e2e2;
+  padding: 2rem 1rem;
+  position: relative;
+  margin: 1rem 0;
+
+  .message{
+    font-size: larger;
+  }
+
+  .message-id {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: .5rem;
+    font-size: large;
+    color: #c2c2c2;
+  }
+}

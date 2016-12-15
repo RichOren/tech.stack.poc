@@ -45,30 +45,41 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    entry: [
-        'webpack-dev-server/client?http://localhost:5000',
-        'webpack/hot/dev-server',
-        'babel-polyfill',
-        './src/index'
-    ],
+    entry: {
+        vendor: [
+            'webpack-dev-server/client?http://localhost:5000',
+            'webpack/hot/dev-server',
+            'babel-polyfill',
+            'normalizecss',
+            'react',
+            'react-dom',
+            'react-router'
+        ],
+        app: './src/index'
+    },
     output: {
         path: path.join(__dirname, "build"),
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
     },
     resolve: {
-        extensions: ['', '.tsx', '.ts', '.jsx', '.js']
+        alias: {
+          'normalizecss': 'normalizecss/normalize.css'
+        },
+        extensions: ['.tsx', '.ts', '.jsx', '.js']
     },
     devtool: 'source-map',
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', chunks: ['app'], filename: "vendor.bundle.js"}),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ],
     module: {
         loaders: [
-            {test: /\.ts/, loaders: ['babel?presets[]=es2015&presets[]=stage-3','ts-loader']},
+            {test: /\.ts/, loaders: ['babel-loader?presets[]=es2015&presets[]=stage-0','ts-loader']},
             {test: /\.json/, loader: 'json-loader'},
             {test: /\.html/, loader: 'html-loader'},
-            {test: /\.css/, loader: 'css-loader'}
+            {test: /\.css/, loaders: ['style-loader','css-loader']},
+            {test: /\.scss/, loaders: ['style-loader','css-loader','sass-loader']}
         ]
     }
 };

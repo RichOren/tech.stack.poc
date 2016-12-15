@@ -5,6 +5,7 @@ interface IQuestion {
     question: string;
     notes: string;
     order: string;
+    randomizeAnswerOrdering
     answers: Array<IAnswerModel>;
 }
 
