@@ -10,6 +10,8 @@ import {StateDemoPage} from "./state-demo/state-demo-page.component";
 import {StateDemo} from "./state-demo/state-demo.component";
 import {HelloWorld} from "./hello-world.component";
 import {NotFound} from "./not-found.component";
+import {WeatherPage} from "./weather/weather-page.component";
+import {Weather} from "./weather/weather.component";
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory,store);
@@ -21,6 +23,9 @@ ReactDOM.render(
                 <Route path="/about" component={About}/>
                 <Route path="/state" component={StateDemoPage}>
                     <Route path="/state/:stateParam" component={StateDemo}/>
+                </Route>
+                <Route path="/weather" component={WeatherPage}>
+                    <Route path="/weather/forecast" component={Weather}/>
                 </Route>
                 <Route path="/" component={HelloWorld}/>
                 <Route path="*" component={NotFound}/>

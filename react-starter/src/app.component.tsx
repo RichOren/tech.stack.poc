@@ -14,6 +14,7 @@ export class App extends React.Component<{},{}> {
                 <nav className="site-nav">
                     <Link className="nav-item" activeClassName="nav-item-active" to="/">Hello World</Link>
                     <Link className="nav-item" activeClassName="nav-item-active" to="/state/123">State Demo</Link>
+                    <Link className="nav-item" activeClassName="nav-item-active" to="/weather/forecast">Weather</Link>
                     <Link className="nav-item" activeClassName="nav-item-active" to="/about">About</Link>
                 </nav>
                 <article>

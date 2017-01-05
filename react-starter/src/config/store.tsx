@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, compose, Middleware, combineReducers} from 'redux';
 import {browserHistory} from "react-router";
 import {routerMiddleware, routerReducer} from 'react-router-redux';
+import { createLogicMiddleware } from 'redux-logic';
 import {DevTools} from "./redux-dev.component";
 import {Reducer} from "./reducer";
 
@@ -8,6 +9,8 @@ import {Reducer} from "./reducer";
 const rootReducer = combineReducers(
     getReducers(require.context('../', true, /.*\.reducer\.tsx$/))
 );
+
+const rootLogic = getLogic(require.context('../',true,/.*\.logic\.tsx/));
 
 export function configureStore(initialState?) {
     const store = createStore(
@@ -26,7 +29,8 @@ export function configureStore(initialState?) {
 
 function getMiddleware(): Middleware[] {
     let middleware = [
-        routerMiddleware(browserHistory)
+        routerMiddleware(browserHistory),
+        createLogicMiddleware(rootLogic,{})
     ];
 
     return middleware;
@@ -41,4 +45,11 @@ function getReducers(reducerContext) {
                 [reducer.name]:reducer.reducer
             }
         }, {});
+}
+
+function getLogic(logicContext){
+    return logicContext.keys()
+        .map((logic)=>{
+            return logicContext(logic).default;
+        });
 }

@@ -53,7 +53,10 @@ module.exports = {
             'normalizecss',
             'react',
             'react-dom',
-            'react-router'
+            'react-router',
+            'rxjs',
+            'redux-logic',
+            'axios'
         ],
         app: './src/index'
     },
