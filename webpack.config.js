@@ -58,7 +58,11 @@ module.exports = {
             'redux-logic',
             'axios'
         ],
-        app: './src/index'
+        app: [
+            'webpack-dev-server/client?http://localhost:5000',
+            'webpack/hot/dev-server',
+            './src/index'
+        ]
     },
     output: {
         path: path.join(__dirname, "build"),
@@ -66,23 +70,26 @@ module.exports = {
     },
     resolve: {
         alias: {
-          'normalizecss': 'normalizecss/normalize.css'
+            'normalizecss': 'normalizecss/normalize.css'
         },
         extensions: ['.tsx', '.ts', '.jsx', '.js']
     },
     devtool: 'source-map',
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', chunks: ['app'], filename: "vendor.bundle.js"}),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', chunks: ['app'], filename: "vendor.bundle.js"})
     ],
     module: {
         loaders: [
-            {test: /\.ts/, loaders: ['babel-loader?presets[]=es2015&presets[]=stage-0','ts-loader']},
+            {
+                test: /\.ts|\.tsx/,
+                loaders: ['react-hot-loader', 'babel-loader?presets[]=es2015&presets[]=stage-0', 'ts-loader']
+            },
             {test: /\.json/, loader: 'json-loader'},
             {test: /\.html/, loader: 'html-loader'},
-            {test: /\.css/, loaders: ['style-loader','css-loader']},
-            {test: /\.scss/, loaders: ['style-loader','css-loader','sass-loader']}
+            {test: /\.css/, loaders: ['style-loader', 'css-loader']},
+            {test: /\.scss/, loaders: ['style-loader', 'css-loader', 'sass-loader']}
         ]
     }
 };
