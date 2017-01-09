@@ -11,7 +11,7 @@ export const DevTools = createDevTools(
                  changePositionKey='ctrl-q'>
             <MultipleMonitors>
                 <DiffMonitor theme='tomorrow'/>
-                <Inspector/>
+                <Inspector supportImmutable={true} />
                 <Dispatcher />
             </MultipleMonitors>
     </DockMonitor>

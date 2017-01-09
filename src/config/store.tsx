@@ -1,10 +1,12 @@
-import {createStore, applyMiddleware, compose, Middleware, combineReducers} from 'redux';
+import * as Immutable from 'immutable';
+import {combineReducers} from "redux-immutable";
+import {createStore, applyMiddleware, compose, Middleware} from 'redux';
 import {browserHistory} from "react-router";
-import {routerMiddleware, routerReducer} from 'react-router-redux';
+import {routerMiddleware} from 'react-router-redux';
 import { createLogicMiddleware } from 'redux-logic';
 import {DevTools} from "./redux-dev.component";
 import {Reducer} from "./reducer";
-
+import routerReducer from "./router/router-reducer";
 
 const rootReducer = combineReducers(
     getReducers(require.context('../', true, /.*\.reducer\.tsx$/))
@@ -12,7 +14,9 @@ const rootReducer = combineReducers(
 
 const rootLogic = getLogic(require.context('../',true,/.*\.logic\.tsx/));
 
-export function configureStore(initialState?) {
+const initialState = Immutable.Map();
+
+export function configureStore() {
     const store = createStore(
         combineReducers({
             app: rootReducer,
@@ -20,8 +24,8 @@ export function configureStore(initialState?) {
         }),
         initialState,
         compose(
-            applyMiddleware(...getMiddleware()),
-            DevTools.instrument()
+           applyMiddleware(...getMiddleware()),
+           DevTools.instrument(),
         ));
 
     return store;

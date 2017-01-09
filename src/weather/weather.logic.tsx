@@ -6,11 +6,13 @@ import {
     createFetchWeatherErrorAction
 } from "./fetch-weather.action";
 
+console.log( 'hello world, logically'  );
 export default createLogic({
     type: FETCH_WEATHER,
     cancelType: CANCEL_FETCH_WEATHER,
     latest: true,
     process({getState, action}, dispatch) {
+        console.log('fetch weather logic triggered');
         axios.get('http://api.wunderground.com/api/8ceaa995f3de652b/forecast/geolookup/conditions/q/UT/Draper.json')
             .then(resp => resp.data)
             .then(weather => dispatch(createFetchWeatherSuccessAction(action.payload.id, weather)))

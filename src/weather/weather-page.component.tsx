@@ -12,7 +12,7 @@ interface DispatchProps {
 type WeatherPageProps = StateProps & DispatchProps;
 function mapStateToProps(state) {
     return {
-        weather: state.app.weather
+        weather: state.getIn(['app','weather'])
     };
 }
 function mapDispatchToProps(dispatch) {

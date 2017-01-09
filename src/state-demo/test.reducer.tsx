@@ -1,21 +1,21 @@
 import {Action} from '../config/action';
 import {SEND_MESSAGE} from './test.action';
 import {handleActions} from 'redux-actions';
+import * as Immutable from 'immutable';
+
 const name = "test";
-const defaultState = {
+
+const defaultState = Immutable.fromJS({
     messages:[]
-};
+});
+
 const reducer = handleActions({
     [SEND_MESSAGE]: (state, action: Action<SEND_MESSAGE>) => {
-        return Object.assign({}, state,{
-            messages:[
-                ...state.messages,
-                {
-                    id: action.payload.id,
-                    message: action.payload.message
-                }
-            ]
-        });
+        return state.updateIn(['messages'], messages => messages.push({
+                id: action.payload.id,
+                message: action.payload.message
+            })
+        )
     }
 },defaultState);
 

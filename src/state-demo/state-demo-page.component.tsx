@@ -12,7 +12,7 @@ interface DispatchProps {
 type StateDemoProps = StateProps & DispatchProps;
 function mapStateToProps(state) {
     return {
-        messages: state.app.test.messages
+        messages: state.getIn(['app','test','messages']).toJS()
     };
 }
 function mapDispatchToProps(dispatch) {

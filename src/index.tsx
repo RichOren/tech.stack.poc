@@ -14,7 +14,20 @@ import {WeatherPage} from "./weather/weather-page.component";
 import {Weather} from "./weather/weather.component";
 
 const store = configureStore();
-const history = syncHistoryWithStore(browserHistory,store);
+const createSelectLocationState = () => {
+    let prevRoutingState, prevRoutingStateJS;
+    return (state) => {
+        const routingState = state.get('routing'); // or state.routing
+        if (typeof prevRoutingState === 'undefined' || prevRoutingState !== routingState) {
+            prevRoutingState = routingState;
+            prevRoutingStateJS = routingState.toJS();
+        }
+        return prevRoutingStateJS;
+    };
+};
+const history = syncHistoryWithStore(browserHistory,store,{
+    selectLocationState: createSelectLocationState()
+});
 
 ReactDOM.render(
     <Provider store={store}>

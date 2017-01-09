@@ -26,9 +26,9 @@ export class StateDemo extends React.Component<StateDemoProps,{message:string}> 
                 </div>
                 <section className="messages">
                 {
-                    this.props.messages.map((message)=>{
+                    this.props.messages.map((message, index)=>{
                         return (
-                            <div className="message-card"><span className="message">{message.message}</span><span className="message-id">message #{message.id}</span></div>
+                            <div className="message-card" key={index}><span className="message">{message.message}</span><span className="message-id">message #{message.id}</span></div>
                         );
                     })
                 }
